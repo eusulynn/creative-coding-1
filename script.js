@@ -5,10 +5,14 @@ window.addEventListener("load", function(){
   canvas.height = 600;
   // canvas setting, use inspect to see settings
   console.log(ctx);
-  ctx.lineWidth = 30;
+  ctx.lineWidth = 10;
   ctx.lineCap = 'round';
-  ctx.strokeStyle = 'green';
   ctx.fillStyle = 'blue';
+  ctx.shadowColor = 'black';
+  ctx.shadowOffsetY = 10;
+  ctx.shadowOffsetX = 5;
+  ctx.shadowBlur = 10;
+
 
 
   // class is a template for creating objects, of which variables and functions are bundled in ( encapsulation of OOP)
@@ -24,18 +28,19 @@ window.addEventListener("load", function(){
       this.canvasWidth = canvasWidth;
       this.canvasHeight = canvasHeight;
       this.size = this.canvasWidth * 0.3;
-      this.side = 8
+      this.side = 6
       this.maxLevel = 3
       this.scale = 0.5
-      this.spread = 1
+      this.spread = Math.random() * 2.8 + 0.1 // this makes the range start from 0.1 instead of 0 rad which might mess things up
       this.branches = 2
+      this.color = 'hsl('+ Math.random() * 360 +', 100%, 50%)'
     }
     //draw method- draws a shape based on the given values of this method.
     //its a public draw method that can be called from the outside and will draw the complete fractal shape with for loops.
     //requires one argument- "context"
     draw(context) {
       // context.fillRect(20,30,this.canvasWidth,this.canvasHeight);
-
+      context.strokeStyle = this.color
       context.save()
       context.translate(this.canvasWidth/2 , this.canvasHeight/2);
       context.scale(0.7,0.7)
